@@ -1,0 +1,27 @@
+/* Home.module.css */
+.homeContainer {
+  margin-top: 20px;
+}
+
+.bookGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.bookItem {
+  padding: 20px;
+}
+
+.bookLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.deleteButton {
+  margin-right: 10px;
+}
+
+.updateButton {
+  margin-top: 10px;
+}

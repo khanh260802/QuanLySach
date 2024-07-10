@@ -1,0 +1,38 @@
+/* MainNavigation.module.css */
+.header {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .nav {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .li {
+    padding: 0.5rem;
+  }
+  
+  .link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  .link:hover, 
+  a.active
+  {
+    text-decoration: underline;
+    font-weight: bold;
+    color: #0e57a5;
+  }
+  
