@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import {useNavigate} from 'react-router-dom'; 
 import { createBook } from '../../api/bookApi';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
@@ -6,6 +7,8 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { toast } from "react-toastify";
+import HandleError from '../../utils/HandleError';
 
 const FormAddBook = () => {
   const [title, setTitle] = useState('');
@@ -13,16 +16,27 @@ const FormAddBook = () => {
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
-
+  const navigate = useNavigate();
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
   const months = Array.from({ length: 12 }, (_, i) => i + 1);
   const years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i);
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const publishedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     const newBook = { title, author, published_date: publishedDate };
-    await createBook(newBook);   
+    try {
+      await createBook(newBook);   
+      toast.success('thêm thành công')
+    } catch (error) {
+      HandleError(error)
+      // toast.error(error.response.data.errors[0].msg)
+    }
+    navigate('/')
+    // điều hướng về trang home
+    
   };
 
   return (

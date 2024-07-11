@@ -1,18 +1,25 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './BookDetails.module.css';
 import { updateBook } from '../../api/bookApi';
+import { toast } from 'react-toastify';
+import HandleError from '../../utils/HandleError';
 
 const BookDetails = () => {
   const book = useLoaderData();
   const [title, setTitle] = useState(book.title);
   const [author, setAuthor] = useState(book.author);
   const [publishedDate, setPublishedDate] = useState(book.published_date);
-
+  const navigate = useNavigate(); 
   const handleUpdate = async () => {
     const updatedBook = { title, author, published_date: publishedDate };
-    updateBook(book.id, updatedBook);
-
+    try {
+      await updateBook(book.id, updatedBook);
+      toast.success('cập nhật thành công!')
+    } catch (error) {
+      HandleError(error)
+    }
+    navigate('/'); 
   };
 
   return (

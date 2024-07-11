@@ -28,6 +28,8 @@ services:
       build: ./front-end
       ports:
         - "8080:80"
+      environment:
+        - VITE_API_URL=http://127.0.0.1:5000
       depends_on:
         - backend
 volumes:

@@ -1,15 +1,22 @@
-import React from 'react';
+import {useState} from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { Button, Card, CardContent, Container, Grid, Typography } from '@mui/material';
 import { deleteBook } from '../../api/bookApi';
 import styles from './Home.module.css'; // Import CSS module
+import { toast } from 'react-toastify';
+import HandleError from '../../utils/HandleError';
 
 const Home = () => {
-  const books = useLoaderData();
-
+  // const books = useLoaderData();
+  const [books, setBooks] = useState(useLoaderData());
   const handleDelete = async (id) => {
-    // Xử lý logic xóa sách ở đây
-    await deleteBook(id);
+    try {
+      await deleteBook(id);
+      toast.success('Xoá thành công!')
+    } catch (error) {
+      HandleError(error)
+    }
+    setBooks(books.filter((book) => book.id !== id));
   };
 
   return (
